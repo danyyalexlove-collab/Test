@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sonia's Restaurant & Banquet Hall — Leamington, ON</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,wght@0,300;0,700;0,900;1,300;1,700;1,900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rojo: #C8102E;
+  --verde: #006847;
+  --blanco: #FFFFFF;
+  --crema: #FAF7F2;
+  --negro: #0A0A0A;
+  --gris: #1A1A1A;
+  --oro: #D4A017;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--negro); color: var(--blanco); overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 48px; height: 70px;
+  background: rgba(10,10,10,0.92); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 4px; color: var(--blanco); display: flex; align-items: center; gap: 10px; }
+.nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rojo); }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: white; }
+.nav-cta { background: var(--rojo); color: white; padding: 10px 28px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: background 0.2s; clip-path: polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); }
+.nav-cta:hover { background: #a00d25; }
+
+/* HERO */
+.hero { height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
+.hero-img-wrap { position: relative; overflow: hidden; }
+.hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5); animation: zoom 10s ease both; }
+@keyframes zoom { from { transform: scale(1.08); } to { transform: scale(1.02); } }
+.hero-img-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, transparent 50%, var(--negro) 100%), linear-gradient(0deg, var(--negro) 0%, transparent 25%); }
+.flag-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: linear-gradient(to bottom, var(--verde) 33.3%, white 33.3%, white 66.6%, var(--rojo) 66.6%); z-index: 2; }
+.hero-content { display: flex; flex-direction: column; justify-content: center; padding: 120px 60px 80px 50px; }
+.hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; animation: fadeUp 0.8s 0.2s both; }
+.eyebrow-bar { width: 36px; height: 2px; background: var(--rojo); }
+.eyebrow-txt { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.45); font-weight: 500; }
+h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(70px,9vw,118px); line-height: 0.9; letter-spacing: 2px; margin-bottom: 10px; animation: fadeUp 0.8s 0.3s both; }
+.c-verde { color: var(--verde); } .c-blanco { color: white; } .c-rojo { color: var(--rojo); }
+.hero-sub { font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(15px,1.8vw,20px); color: rgba(255,255,255,0.45); margin-bottom: 32px; font-weight: 300; animation: fadeUp 0.8s 0.4s both; }
+.hero-p { font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.6); max-width: 380px; margin-bottom: 44px; animation: fadeUp 0.8s 0.5s both; }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; animation: fadeUp 0.8s 0.6s both; }
+.btn-red { background: var(--rojo); color: white; padding: 15px 32px; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; clip-path: polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition: all 0.2s; }
+.btn-red:hover { background: #a00d25; transform: translateY(-2px); }
+.btn-outline { border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.65); padding: 15px 32px; font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: all 0.2s; }
+.btn-outline:hover { border-color: white; color: white; }
+.hero-chips { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; background: rgba(10,10,10,0.85); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.07); overflow: hidden; animation: fadeUp 0.8s 0.8s both; }
+.chip { padding: 18px 32px; text-align: center; border-right: 1px solid rgba(255,255,255,0.06); }
+.chip:last-child { border-right: none; }
+.chip-num { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 2px; color: var(--rojo); line-height: 1; margin-bottom: 3px; }
+.chip-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+
+/* GALERÍA */
+.galeria { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 280px 280px; gap: 3px; }
+.g { overflow: hidden; position: relative; }
+.g img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s, filter 0.4s; filter: brightness(0.8) saturate(1.1); }
+.g:hover img { transform: scale(1.06); filter: brightness(1) saturate(1.2); }
+.g.tall { grid-row: 1 / 3; }
+.g-tag { position: absolute; bottom: 14px; left: 14px; background: var(--rojo); color: white; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 5px 12px; clip-path: polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%); }
+
+/* COMIDAS */
+.comidas { background: var(--crema); color: var(--negro); padding: 100px 0; position: relative; overflow: hidden; }
+.flag-top { position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--verde) 33.3%, white 33.3%, white 66.6%, var(--rojo) 66.6%); }
+.inner { max-width: 1280px; margin: 0 auto; padding: 0 60px; }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 56px; }
+.eyebrow { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--rojo); font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.eyebrow::before { content: ''; width: 22px; height: 2px; background: var(--rojo); }
+.stitle { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px,6vw,80px); line-height: 0.9; letter-spacing: 2px; color: var(--negro); }
+.stitle .r { color: var(--rojo); }
+.sdesc { font-size: 14px; color: #777; line-height: 1.75; max-width: 360px; align-self: end; }
+.paquetes { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; background: #ddd; }
+.pak { background: white; padding: 44px 36px; position: relative; overflow: hidden; transition: all 0.3s; }
+.pak.dark { background: var(--negro); color: white; }
+.pak:hover:not(.dark) { background: #f5f5f5; transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
+.pak-corner { position: absolute; top: 0; right: 0; width: 56px; height: 56px; background: var(--rojo); clip-path: polygon(100% 0%,100% 100%,0% 0%); }
+.pak.dark .pak-corner { background: var(--verde); }
+.pak-n { font-family: 'Bebas Neue', sans-serif; font-size: 76px; line-height: 1; color: rgba(0,0,0,0.04); letter-spacing: 2px; margin-bottom: 8px; }
+.pak.dark .pak-n { color: rgba(255,255,255,0.04); }
+.pak-badge { display: inline-block; padding: 4px 12px; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; background: var(--rojo); color: white; clip-path: polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%); }
+.pak.dark .pak-badge { background: var(--verde); }
+.pak-name { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 700; color: var(--negro); margin-bottom: 10px; line-height: 1.2; }
+.pak.dark .pak-name { color: white; }
+.pak-desc { font-size: 13px; color: #999; line-height: 1.65; margin-bottom: 22px; }
+.pak.dark .pak-desc { color: rgba(255,255,255,0.45); }
+.pak-price { font-family: 'Bebas Neue', sans-serif; font-size: 54px; letter-spacing: 2px; color: var(--rojo); line-height: 1; }
+.pak-note { font-size: 11px; color: #bbb; margin-bottom: 22px; }
+.pak.dark .pak-note { color: rgba(255,255,255,0.35); }
+.pak-list { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 28px; }
+.pak-list li { font-size: 13px; color: #555; display: flex; align-items: center; gap: 10px; }
+.pak.dark .pak-list li { color: rgba(255,255,255,0.6); }
+.pak-list li::before { content: ''; width: 18px; height: 18px; border-radius: 50%; background: var(--verde); flex-shrink: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E"); background-size: 11px; background-repeat: no-repeat; background-position: center; }
+.pak-btn { display: block; text-align: center; padding: 14px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; background: var(--rojo); color: white; clip-path: polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition: background 0.2s; }
+.pak-btn:hover { background: #a00d25; }
+.pak.dark .pak-btn { background: var(--verde); }
+.pak.dark .pak-btn:hover { background: #004d33; }
+
+/* MENU */
+.menu-sec { background: var(--negro); padding: 100px 0; }
+.menu-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; background: rgba(255,255,255,0.04); }
+.plato { background: var(--gris); padding: 32px 26px; border-top: 2px solid transparent; transition: all 0.2s; position: relative; overflow: hidden; }
+.plato::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--verde); transform: scaleX(0); transition: transform 0.3s; }
+.plato:hover { background: #222; border-top-color: var(--rojo); }
+.plato:hover::after { transform: scaleX(1); }
+.plato-emo { font-size: 30px; margin-bottom: 14px; display: block; }
+.plato-name { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 700; color: white; margin-bottom: 7px; line-height: 1.2; }
+.plato-desc { font-size: 12px; color: rgba(255,255,255,0.35); line-height: 1.6; margin-bottom: 14px; }
+.plato-price { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 2px; color: var(--rojo); }
+
+/* EVENTOS */
+.eventos { display: grid; grid-template-columns: 1fr 1fr; min-height: 580px; }
+.ev-img { position: relative; overflow: hidden; }
+.ev-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.55); }
+.ev-img-ov { position: absolute; inset: 0; background: linear-gradient(90deg, transparent 60%, var(--negro) 100%); }
+.ev-content { background: var(--negro); padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; position: relative; }
+.ev-content::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: linear-gradient(to bottom, var(--verde), white 50%, var(--rojo)); }
+.ev-tipos { display: flex; flex-direction: column; gap: 2px; margin: 32px 0; }
+.ev-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 18px 22px; display: flex; align-items: center; gap: 16px; transition: all 0.2s; }
+.ev-item:hover { background: rgba(200,16,46,0.08); border-color: rgba(200,16,46,0.3); }
+.ev-ico { font-size: 24px; flex-shrink: 0; }
+.ev-name { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; color: white; margin-bottom: 3px; }
+.ev-desc { font-size: 12px; color: rgba(255,255,255,0.4); }
+.ev-note { font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+.ev-tel { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 3px; color: white; text-decoration: none; transition: color 0.2s; }
+.ev-tel:hover { color: var(--rojo); }
+
+/* REVIEWS */
+.reviews { background: var(--rojo); padding: 80px 0; }
+.reviews-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 44px; }
+.reviews-title { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 2px; color: white; line-height: 1; }
+.rev-num { font-family: 'Bebas Neue', sans-serif; font-size: 68px; color: white; line-height: 1; text-align: right; }
+.rev-stars { font-size: 18px; letter-spacing: 3px; text-align: right; }
+.rev-count { font-size: 11px; color: rgba(255,255,255,0.55); letter-spacing: 1px; text-transform: uppercase; text-align: right; }
+.reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: rgba(255,255,255,0.08); }
+.rev { background: rgba(255,255,255,0.07); padding: 30px; transition: background 0.2s; }
+.rev:hover { background: rgba(255,255,255,0.13); }
+.rev-txt { font-family: 'Fraunces', serif; font-style: italic; font-size: 14px; color: rgba(255,255,255,0.9); line-height: 1.7; margin-bottom: 18px; font-weight: 300; }
+.rev-author { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.45); letter-spacing: 1px; text-transform: uppercase; }
+
+/* UBICACIÓN */
+.ubicacion { background: var(--crema); display: grid; grid-template-columns: 1fr 1fr; }
+.ub-info { padding: 80px 60px; position: relative; }
+.ub-info::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--verde) 33.3%, white 33.3%, white 66.6%, var(--rojo) 66.6%); }
+.ub-title { font-family: 'Bebas Neue', sans-serif; font-size: 62px; letter-spacing: 2px; color: var(--negro); line-height: 0.9; margin-bottom: 40px; }
+.ub-title span { color: var(--rojo); }
+.info-row { display: grid; grid-template-columns: 90px 1fr; padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.08); font-size: 14px; }
+.info-lbl { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--verde); padding-top: 2px; }
+.info-val { color: #444; line-height: 1.5; }
+.info-val a { color: var(--rojo); text-decoration: none; font-weight: 600; }
+.mapa { position: relative; overflow: hidden; min-height: 400px; }
+.mapa iframe { width: 100%; height: 100%; border: none; min-height: 400px; filter: grayscale(0.2) contrast(1.1); }
+
+/* FOOTER */
+footer { background: var(--negro); border-top: 1px solid rgba(255,255,255,0.05); }
+.footer-main { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; padding: 60px; max-width: 1280px; margin: 0 auto; }
+.f-brand { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 3px; color: white; margin-bottom: 6px; }
+.f-tagline { font-family: 'Fraunces', serif; font-style: italic; font-size: 13px; color: rgba(255,255,255,0.3); margin-bottom: 18px; }
+.f-flag { display: flex; gap: 3px; margin-bottom: 20px; }
+.f-flag-b { height: 4px; flex: 1; border-radius: 2px; }
+.f-socials { display: flex; gap: 10px; }
+.f-social { width: 34px; height: 34px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 12px; text-decoration: none; color: rgba(255,255,255,0.4); transition: all 0.2s; }
+.f-social:hover { border-color: var(--rojo); color: var(--rojo); }
+.f-col-title { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 18px; }
+.f-col-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.f-col-links a { font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+.f-col-links a:hover { color: white; }
+.footer-bot { border-top: 1px solid rgba(255,255,255,0.05); padding: 18px 60px; display: flex; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,0.18); max-width: 1280px; margin: 0 auto; }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-img-wrap { height: 50vh; }
+  .hero-content { padding: 60px 24px; }
+  .hero-chips { display: none; }
+  .galeria { grid-template-columns: 1fr 1fr; grid-template-rows: 200px 200px; }
+  .g.tall { grid-row: auto; }
+  .inner { padding: 0 24px; }
+  .comidas { padding: 60px 0; }
+  .split { grid-template-columns: 1fr; }
+  .paquetes, .menu-grid { grid-template-columns: 1fr; }
+  .eventos { grid-template-columns: 1fr; }
+  .ev-img { height: 280px; }
+  .ev-content { padding: 60px 24px; }
+  .reviews { padding: 60px 0; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .ubicacion { grid-template-columns: 1fr; }
+  .ub-info { padding: 60px 24px; }
+  .footer-main { grid-template-columns: 1fr 1fr; padding: 40px 24px; gap: 32px; }
+  .footer-bot { padding: 18px 24px; flex-direction: column; gap: 6px; }
+}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><div class="nav-dot"></div>SONIA'S</div>
+  <ul class="nav-links">
+    <li><a href="#comidas">Comidas Semanales</a></li>
+    <li><a href="#menu">Menú</a></li>
+    <li><a href="#eventos">Eventos</a></li>
+    <li><a href="#ubicacion">Ubicación</a></li>
+  </ul>
+  <a href="tel:5199995421" class="nav-cta">Ordenar</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-img-wrap">
+    <div class="flag-bar"></div>
+    <img src="https://static2.menufyy.com/sonias-restaurant-banquet-hall-albums-1.jpg" alt="Sonia's Restaurant Leamington">
+    <div class="hero-img-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><div class="eyebrow-bar"></div><span class="eyebrow-txt">Leamington, Ontario · Desde 2022</span></div>
+    <h1><div class="c-verde">SONIA'S</div><div class="c-blanco">RESTAURANT</div><div class="c-rojo">& EVENTS</div></h1>
+    <p class="hero-sub">El sabor de México en Ontario</p>
+    <p class="hero-p">Cocina mexicana auténtica preparada con recetas tradicionales. Para los que extrañan el sabor de casa y para quienes lo descubren por primera vez.</p>
+    <div class="hero-btns">
+      <a href="#comidas" class="btn-red">Comidas Semanales</a>
+      <a href="#menu" class="btn-outline">Ver Menú</a>
+    </div>
+  </div>
+  <div class="hero-chips">
+    <div class="chip"><div class="chip-num">4.7★</div><div class="chip-label">Calificación</div></div>
+    <div class="chip"><div class="chip-num">100%</div><div class="chip-label">Auténtico</div></div>
+    <div class="chip"><div class="chip-num">2022</div><div class="chip-label">Fundado</div></div>
+    <div class="chip"><div class="chip-num">130</div><div class="chip-label">Erie St N</div></div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<div class="galeria">
+  <div class="g tall">
+    <img src="https://static2.menufyy.com/sonias-restaurant-banquet-hall-albums-2.jpg" alt="Platillos">
+    <div class="g-tag">Nuestros Platillos</div>
+  </div>
+  <div class="g">
+    <img src="https://static2.menufyy.com/sonias-restaurant-banquet-hall-albums-3.jpg" alt="Interior">
+    <div class="g-tag">El Lugar</div>
+  </div>
+  <div class="g">
+    <img src="https://static2.menufyy.com/sonias-restaurant-banquet-hall-albums-4.jpg" alt="Comida">
+  </div>
+  <div class="g">
+    <img src="https://static2.menufyy.com/sonias-restaurant-banquet-hall-albums-5.jpg" alt="Especial">
+  </div>
+  <div class="g">
+    <img src="https://static2.menufyy.com/sonias-restaurant-banquet-hall-albums-6.jpg" alt="Ambiente">
+    <div class="g-tag">Banquet Hall</div>
+  </div>
+</div>
+
+<!-- COMIDAS SEMANALES -->
+<section class="comidas" id="comidas">
+  <div class="flag-top"></div>
+  <div class="inner">
+    <div class="split">
+      <div>
+        <div class="eyebrow">Para los migrantes</div>
+        <h2 class="stitle">COMIDAS<br><span class="r">SEMANALES</span></h2>
+      </div>
+      <p class="sdesc">Pedidos disponibles jue–sáb. Llama o escríbenos para apartar tu paquete antes del mediodía.</p>
+    </div>
+    <div class="paquetes">
+      <div class="pak">
+        <div class="pak-corner"></div>
+        <div class="pak-n">01</div>
+        <div class="pak-badge">Básico</div>
+        <div class="pak-name">Paquete 2 Comidas</div>
+        <p class="pak-desc">Ideal para la semana laboral. Dos platillos completos con sazón de abuela.</p>
+        <div class="pak-price">$22</div>
+        <div class="pak-note">CAD · por paquete</div>
+        <ul class="pak-list">
+          <li>2 platillos a elegir</li>
+          <li>Arroz y frijoles</li>
+          <li>Tortillas de maíz</li>
+          <li>Salsa de la casa</li>
+        </ul>
+        <a href="tel:5199995421" class="pak-btn">Ordenar → (519) 999-5421</a>
+      </div>
+      <div class="pak dark">
+        <div class="pak-corner"></div>
+        <div class="pak-n">02</div>
+        <div class="pak-badge">Más Popular</div>
+        <div class="pak-name">Paquete 3 Comidas</div>
+        <p class="pak-desc">Para los que trabajan duro. Más variedad, más energía, más México.</p>
+        <div class="pak-price">$30</div>
+        <div class="pak-note">CAD · por paquete</div>
+        <ul class="pak-list">
+          <li>3 platillos a elegir</li>
+          <li>Arroz y frijoles</li>
+          <li>Tortillas de maíz</li>
+          <li>Salsa de la casa</li>
+          <li>Postre del día</li>
+        </ul>
+        <a href="tel:5199995421" class="pak-btn">Ordenar → (519) 999-5421</a>
+      </div>
+      <div class="pak">
+        <div class="pak-corner" style="background:var(--verde)"></div>
+        <div class="pak-n">03</div>
+        <div class="pak-badge" style="background:var(--verde)">Familiar</div>
+        <div class="pak-name">Paquete Familiar</div>
+        <p class="pak-desc">Para toda la cuadrilla. Porciones para 4–5 personas.</p>
+        <div class="pak-price" style="color:var(--verde)">$55</div>
+        <div class="pak-note">CAD · 4–5 personas</div>
+        <ul class="pak-list">
+          <li>5 platillos a elegir</li>
+          <li>Arroz y frijoles para todos</li>
+          <li>Tortillas maíz y harina</li>
+          <li>2 salsas de la casa</li>
+          <li>Agua fresca 1 litro</li>
+        </ul>
+        <a href="tel:5199995421" class="pak-btn" style="background:var(--verde)">Ordenar → (519) 999-5421</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENÚ -->
+<section class="menu-sec" id="menu">
+  <div class="inner">
+    <div class="split" style="margin-bottom:48px">
+      <div>
+        <div class="eyebrow" style="color:var(--verde)">Cocina auténtica</div>
+        <h2 class="stitle" style="color:white">NUESTRO <span class="r">MENÚ</span></h2>
+      </div>
+      <p style="font-size:14px;color:rgba(255,255,255,0.35);line-height:1.75;max-width:300px;align-self:end">Ingredientes frescos, recetas tradicionales. Todo hecho por Sonia y su equipo.</p>
+    </div>
+    <div class="menu-grid">
+      <div class="plato"><span class="plato-emo">🌮</span><div class="plato-name">Birria Tacos</div><div class="plato-desc">Res estofada, queso fundido, consomé para dipping</div><div class="plato-price">$16</div></div>
+      <div class="plato"><span class="plato-emo">🍳</span><div class="plato-name">Chilaquiles Divorciados</div><div class="plato-desc">Salsa roja y verde, crema, queso, cebolla morada</div><div class="plato-price">$14</div></div>
+      <div class="plato"><span class="plato-emo">🫓</span><div class="plato-name">Gorditas</div><div class="plato-desc">3 piezas, proteína a elegir, frijoles y queso</div><div class="plato-price">$15</div></div>
+      <div class="plato"><span class="plato-emo">🥘</span><div class="plato-name">Molcajete</div><div class="plato-desc">Carne, nopal, queso, salsa, arroz y tortillas</div><div class="plato-price">$22</div></div>
+      <div class="plato"><span class="plato-emo">🍕</span><div class="plato-name">Pizza de Birria</div><div class="plato-desc">Masa artesanal, birria, queso oaxaca, consomé</div><div class="plato-price">$18</div></div>
+      <div class="plato"><span class="plato-emo">🦐</span><div class="plato-name">Tostada de Ceviche</div><div class="plato-desc">Camarón fresco, limón, chile, aguacate</div><div class="plato-price">$13</div></div>
+      <div class="plato"><span class="plato-emo">🫔</span><div class="plato-name">Tamales</div><div class="plato-desc">Preparación tradicional, varios sabores</div><div class="plato-price">$5 c/u</div></div>
+      <div class="plato"><span class="plato-emo">☕</span><div class="plato-name">Café de Olla</div><div class="plato-desc">Canela, piloncillo, receta de abuela</div><div class="plato-price">$4</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTOS -->
+<section class="eventos" id="eventos">
+  <div class="ev-img">
+    <img src="https://static2.menufyy.com/sonias-restaurant-banquet-hall-albums-7.jpg" alt="Salón Sonia's">
+    <div class="ev-img-ov"></div>
+  </div>
+  <div class="ev-content">
+    <div class="eyebrow" style="color:var(--oro)">Salón de eventos</div>
+    <h2 class="stitle" style="color:white;font-size:clamp(44px,5.5vw,70px)">CELEBRA<br><span class="r">CON</span><br>NOSOTROS</h2>
+    <div class="ev-tipos">
+      <div class="ev-item"><div class="ev-ico">💍</div><div><div class="ev-name">Bodas</div><div class="ev-desc">El día más especial merece la mejor comida</div></div></div>
+      <div class="ev-item"><div class="ev-ico">🎂</div><div><div class="ev-name">Quinceañeras & Cumpleaños</div><div class="ev-desc">Celebraciones grandes y pequeñas</div></div></div>
+      <div class="ev-item"><div class="ev-ico">🎉</div><div><div class="ev-name">Bautizos & Reuniones</div><div class="ev-desc">Graduaciones, fiestas familiares y más</div></div></div>
+    </div>
+    <div class="ev-note">Reservaciones y cotizaciones</div>
+    <a href="tel:5199995421" class="ev-tel">(519) 999-5421</a>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews">
+  <div class="inner">
+    <div class="reviews-hdr">
+      <div>
+        <div class="eyebrow" style="color:rgba(255,255,255,0.5)">Lo que dicen de nosotros</div>
+        <div class="reviews-title">RESEÑAS<br>REALES</div>
+      </div>
+      <div><div class="rev-num">4.7</div><div class="rev-stars">★★★★★</div><div class="rev-count">+21 Reseñas · Google</div></div>
+    </div>
+    <div class="reviews-grid">
+      <div class="rev"><p class="rev-txt">"Sin duda la mejor comida mexicana en la región Windsor Essex. Personal muy amable también."</p><div class="rev-author">Ben K. · ★★★★★</div></div>
+      <div class="rev"><p class="rev-txt">"Primera vez en Sonia's y quedamos muy impresionados. Restaurante limpio, estiloso y personal super amable."</p><div class="rev-author">Courtney H. · ★★★★★</div></div>
+      <div class="rev"><p class="rev-txt">"Los tamales son ENORMES. El salón es un espacio único, espacioso y cómodo. Definitivamente regresaré."</p><div class="rev-author">Jason B. · ★★★★★</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- UBICACIÓN -->
+<section class="ubicacion" id="ubicacion">
+  <div class="ub-info">
+    <h2 class="ub-title">VEN A<br><span>VISITARNOS</span></h2>
+    <div class="info-row"><span class="info-lbl">Dirección</span><span class="info-val">130 Erie St N, Leamington, ON N8H 3A2</span></div>
+    <div class="info-row"><span class="info-lbl">Teléfono</span><span class="info-val"><a href="tel:5199995421">(519) 999-5421</a></span></div>
+    <div class="info-row"><span class="info-lbl">Email</span><span class="info-val"><a href="mailto:restaurantsonias@gmail.com">restaurantsonias@gmail.com</a></span></div>
+    <div class="info-row"><span class="info-lbl">Horario</span><span class="info-val">Jue–Vie 10am–8pm · Sáb 10am–9pm · Dom 10am–8pm</span></div>
+    <div class="info-row"><span class="info-lbl">Cerrado</span><span class="info-val" style="color:#bbb">Lunes, Martes, Miércoles</span></div>
+  </div>
+  <div class="mapa">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2962.28605698064!2d-82.59918789999999!3d42.0584875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x883ac1002d6f3541%3A0xe821aaceaf1eaf7f!2sSonia%E2%80%99s%20Restaurant%20%26%20Banquet%20Hall!5e0!3m2!1sen!2s!4v1753642088766!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div>
+      <div class="f-brand">SONIA'S</div>
+      <div class="f-tagline">El sabor de México en Ontario</div>
+      <div class="f-flag">
+        <div class="f-flag-b" style="background:var(--verde)"></div>
+        <div class="f-flag-b" style="background:white"></div>
+        <div class="f-flag-b" style="background:var(--rojo)"></div>
+      </div>
+      <div class="f-socials">
+        <a href="https://www.facebook.com/p/Sonias-Restaurant-Banquet-Hall-61569661957373/" class="f-social" target="_blank">f</a>
+        <a href="https://www.instagram.com/soniacaterings/" class="f-social" target="_blank">ig</a>
+        <a href="tel:5199995421" class="f-social">📞</a>
+      </div>
+    </div>
+    <div>
+      <div class="f-col-title">Menú</div>
+      <ul class="f-col-links">
+        <li><a href="#comidas">Comidas Semanales</a></li>
+        <li><a href="#menu">Platillos</a></li>
+        <li><a href="#eventos">Eventos</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Contacto</div>
+      <ul class="f-col-links">
+        <li><a href="tel:5199995421">(519) 999-5421</a></li>
+        <li><a href="mailto:restaurantsonias@gmail.com">Email</a></li>
+        <li><a href="#ubicacion">Cómo Llegar</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Horario</div>
+      <ul class="f-col-links">
+        <li><a href="#">Jue–Vie 10am–8pm</a></li>
+        <li><a href="#">Sáb 10am–9pm</a></li>
+        <li><a href="#">Dom 10am–8pm</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bot">
+    <span>© 2026 Sonia's Restaurant & Banquet Hall · Leamington, Ontario</span>
+    <span>Sitio web por <strong style="color:rgba(255,255,255,0.4)">Lolo Digital</strong> · lolodigital.ca</span>
+  </div>
+</footer>
+
+</body>
+</html>
