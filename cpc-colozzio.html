@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPC | Colozzio Private Contractor — Integral Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #2B6CB0;
+  --blue-dark: #1A4A7A;
+  --blue-light: #4A90D9;
+  --black: #07090C;
+  --dark: #0F1318;
+  --panel: #141920;
+  --steel: #8B9BB4;
+  --white: #EEF2F7;
+  --yellow: #F6AD55;
+  --green: #48BB78;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Barlow', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+
+/* TEXTURE */
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='3'%3E%3Crect width='3' height='3' fill='%2307090C'/%3E%3Crect width='1' height='1' fill='%23ffffff06'/%3E%3C/svg%3E");
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px; height: 70px;
+  background: rgba(7,9,12,0.95); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(43,108,176,0.25);
+}
+.nav-logo { display: flex; align-items: center; gap: 14px; }
+.nav-hex {
+  width: 38px; height: 38px; background: var(--blue);
+  clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 900; color: white; letter-spacing: 1px;
+}
+.nav-brand { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; line-height: 1; }
+.nav-brand span { display: block; font-size: 9px; font-weight: 400; letter-spacing: 2.5px; color: var(--steel); margin-top: 3px; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--steel); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: white; }
+.nav-cta { background: var(--blue); color: white; padding: 10px 26px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: all 0.2s; clip-path: polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); }
+.nav-cta:hover { background: var(--blue-light); }
+
+/* HERO */
+.hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 90% at 20% 50%, rgba(43,108,176,0.1) 0%, transparent 60%), linear-gradient(160deg, #07090C 0%, #0D1520 50%, #07090C 100%);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(43,108,176,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(43,108,176,0.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 100% 100% at 0% 50%, black 20%, transparent 75%);
+}
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 120px 50px 80px 80px; position: relative; z-index: 1;
+}
+.hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; animation: fadeUp 0.8s 0.1s both; }
+.eyebrow-bar { width: 32px; height: 2px; background: var(--blue); }
+.eyebrow-txt { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--steel); font-weight: 500; }
+h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(64px,8.5vw,108px); font-weight: 900; line-height: 0.88; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; animation: fadeUp 0.8s 0.2s both; }
+.h1-a { color: var(--white); }
+.h1-b { color: var(--blue-light); }
+.h1-c { color: var(--yellow); font-size: 0.45em; font-weight: 400; letter-spacing: 5px; display: block; margin-bottom: 10px; }
+.hero-desc { font-size: 15px; font-weight: 300; color: var(--steel); line-height: 1.8; max-width: 420px; margin-bottom: 44px; animation: fadeUp 0.8s 0.3s both; }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; animation: fadeUp 0.8s 0.4s both; }
+.btn-blue { background: var(--blue); color: white; padding: 15px 32px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; clip-path: polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); transition: all 0.2s; }
+.btn-blue:hover { background: var(--blue-light); transform: translateY(-2px); }
+.btn-ghost { border: 1px solid rgba(139,155,180,0.3); color: var(--steel); padding: 15px 32px; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: all 0.2s; }
+.btn-ghost:hover { border-color: var(--white); color: var(--white); }
+.hero-contacts { margin-top: 48px; display: flex; flex-direction: column; gap: 8px; animation: fadeUp 0.8s 0.5s both; }
+.hero-contact-item { display: flex; align-items: center; gap: 12px; font-size: 13px; }
+.contact-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+.contact-label { color: var(--steel); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; min-width: 60px; }
+.contact-val { color: var(--white); font-weight: 500; }
+
+/* HERO RIGHT - Services Preview */
+.hero-right {
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  padding: 120px 60px 80px 40px; position: relative; z-index: 1; gap: 3px;
+}
+.hero-service-card {
+  width: 100%; background: rgba(20,25,32,0.8); border: 1px solid rgba(43,108,176,0.15);
+  padding: 20px 24px; display: flex; align-items: center; gap: 18px;
+  transition: all 0.2s; border-left: 2px solid transparent;
+  animation: fadeUp 0.6s both;
+}
+.hero-service-card:nth-child(1) { animation-delay: 0.3s; }
+.hero-service-card:nth-child(2) { animation-delay: 0.4s; }
+.hero-service-card:nth-child(3) { animation-delay: 0.5s; }
+.hero-service-card:nth-child(4) { animation-delay: 0.6s; }
+.hero-service-card:nth-child(5) { animation-delay: 0.7s; }
+.hero-service-card:nth-child(6) { animation-delay: 0.8s; }
+.hero-service-card:hover { border-left-color: var(--blue); background: rgba(43,108,176,0.08); }
+.service-icon { font-size: 22px; flex-shrink: 0; width: 40px; text-align: center; }
+.service-name { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--white); margin-bottom: 2px; }
+.service-sub { font-size: 11px; color: var(--steel); }
+
+/* STATS BAR */
+.stats-bar {
+  background: var(--blue-dark); display: grid; grid-template-columns: repeat(4,1fr);
+  border-top: 1px solid rgba(74,144,217,0.3); position: relative; z-index: 1;
+}
+.stat { padding: 32px 40px; text-align: center; border-right: 1px solid rgba(255,255,255,0.06); }
+.stat:last-child { border-right: none; }
+.stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 44px; font-weight: 900; color: white; line-height: 1; letter-spacing: 2px; margin-bottom: 4px; }
+.stat-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+
+/* SERVICES SECTION */
+.services { background: var(--dark); padding: 100px 0; position: relative; overflow: hidden; }
+.services::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blue), transparent);
+}
+.inner { max-width: 1280px; margin: 0 auto; padding: 0 80px; }
+.section-eyebrow { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--blue-light); font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.section-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--blue-light); }
+.section-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(44px,6vw,72px); font-weight: 900; text-transform: uppercase; letter-spacing: 1px; line-height: 0.9; margin-bottom: 16px; }
+.section-title .acc { color: var(--blue-light); }
+.section-desc { font-size: 15px; color: var(--steel); line-height: 1.75; max-width: 500px; margin-bottom: 60px; font-weight: 300; }
+
+.services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: rgba(255,255,255,0.03); }
+.svc-card {
+  background: var(--panel); padding: 44px 36px;
+  border-top: 2px solid transparent; transition: all 0.3s; position: relative; overflow: hidden;
+}
+.svc-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--blue-light); transform: scaleX(0); transition: transform 0.3s; }
+.svc-card:hover { background: #1A2030; border-top-color: var(--blue); }
+.svc-card:hover::after { transform: scaleX(1); }
+.svc-num { font-family: 'Barlow Condensed', sans-serif; font-size: 72px; font-weight: 900; color: rgba(255,255,255,0.03); line-height: 1; margin-bottom: 8px; letter-spacing: 2px; }
+.svc-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+.svc-title { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: white; margin-bottom: 12px; line-height: 1.2; }
+.svc-desc { font-size: 13px; color: var(--steel); line-height: 1.7; margin-bottom: 20px; font-weight: 300; }
+.svc-items { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.svc-items li { font-size: 12px; color: rgba(255,255,255,0.55); display: flex; align-items: center; gap: 8px; }
+.svc-items li::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--blue-light); flex-shrink: 0; }
+
+/* BENEFITS */
+.benefits { background: var(--black); padding: 100px 0; }
+.benefits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: rgba(255,255,255,0.03); margin-top: 60px; }
+.benefit {
+  background: var(--panel); padding: 40px 36px;
+  display: flex; align-items: flex-start; gap: 24px;
+  border-left: 2px solid transparent; transition: all 0.2s;
+}
+.benefit:hover { border-left-color: var(--blue-light); background: #141B24; }
+.benefit-icon-wrap {
+  width: 52px; height: 52px; flex-shrink: 0; background: rgba(43,108,176,0.12);
+  border: 1px solid rgba(43,108,176,0.25); display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+}
+.benefit-title { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: white; margin-bottom: 8px; }
+.benefit-desc { font-size: 13px; color: var(--steel); line-height: 1.7; font-weight: 300; }
+
+/* INDUSTRIES */
+.industries { background: var(--blue-dark); padding: 80px 0; position: relative; overflow: hidden; }
+.industries::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 100% at 50% 50%, rgba(74,144,217,0.1) 0%, transparent 70%); }
+.industries-inner { max-width: 1280px; margin: 0 auto; padding: 0 80px; position: relative; z-index: 1; }
+.industries-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
+.industries-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; background: rgba(0,0,0,0.2); }
+.industry {
+  background: rgba(0,0,0,0.3); padding: 32px 24px; text-align: center;
+  border-top: 2px solid transparent; transition: all 0.2s;
+}
+.industry:hover { background: rgba(43,108,176,0.2); border-top-color: var(--yellow); }
+.industry-ico { font-size: 36px; margin-bottom: 14px; display: block; }
+.industry-name { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: white; margin-bottom: 6px; }
+.industry-desc { font-size: 11px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+/* WHY US */
+.why { background: var(--dark); padding: 100px 0; }
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.why-left {}
+.why-checklist { display: flex; flex-direction: column; gap: 2px; margin-top: 40px; }
+.why-item {
+  background: var(--panel); padding: 22px 28px;
+  display: flex; align-items: center; gap: 18px;
+  border: 1px solid rgba(255,255,255,0.04); transition: all 0.2s;
+}
+.why-item:hover { background: #1A2030; border-color: rgba(43,108,176,0.3); }
+.why-check {
+  width: 28px; height: 28px; background: var(--blue); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-size: 12px; color: white; font-weight: 700;
+}
+.why-txt { font-size: 14px; color: var(--white); font-weight: 500; }
+.why-right { display: flex; flex-direction: column; gap: 2px; }
+.why-metric {
+  background: var(--panel); padding: 36px 40px;
+  border-left: 3px solid var(--blue); transition: all 0.2s;
+}
+.why-metric:hover { background: #1A2030; border-left-color: var(--blue-light); }
+.why-metric-num { font-family: 'Barlow Condensed', sans-serif; font-size: 56px; font-weight: 900; color: var(--blue-light); line-height: 1; margin-bottom: 6px; letter-spacing: 2px; }
+.why-metric-label { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--steel); }
+
+/* CONTACT */
+.contact { background: var(--black); padding: 100px 0; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: rgba(255,255,255,0.03); margin-top: 60px; }
+.contact-info { background: var(--panel); padding: 60px; }
+.contact-form { background: var(--blue-dark); padding: 60px; }
+.contact-title { font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: white; margin-bottom: 32px; }
+.contact-items { display: flex; flex-direction: column; gap: 20px; }
+.c-item { display: flex; align-items: flex-start; gap: 16px; }
+.c-icon { width: 40px; height: 40px; background: rgba(43,108,176,0.15); border: 1px solid rgba(43,108,176,0.3); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.c-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--steel); margin-bottom: 4px; }
+.c-val { font-size: 15px; color: white; font-weight: 500; }
+.c-val a { color: var(--blue-light); text-decoration: none; }
+.form-title { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: white; margin-bottom: 28px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.form-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); font-weight: 600; }
+.form-input, .form-select, .form-textarea {
+  background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1);
+  color: white; padding: 12px 16px; font-family: 'Barlow', sans-serif; font-size: 14px;
+  transition: border-color 0.2s; outline: none; width: 100%;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--blue-light); }
+.form-textarea { min-height: 100px; resize: vertical; }
+.form-select option { background: var(--dark); }
+.form-submit {
+  background: white; color: var(--blue-dark); width: 100%; padding: 16px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 800;
+  letter-spacing: 3px; text-transform: uppercase; border: none; cursor: pointer;
+  transition: all 0.2s; margin-top: 8px;
+  clip-path: polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+}
+.form-submit:hover { background: var(--yellow); transform: translateY(-2px); }
+
+/* FOOTER */
+footer { background: #050608; border-top: 1px solid rgba(43,108,176,0.2); }
+.footer-main { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; padding: 60px 80px; max-width: 1280px; margin: 0 auto; }
+.f-brand { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; color: white; margin-bottom: 6px; }
+.f-tagline { font-size: 12px; color: var(--steel); letter-spacing: 1px; margin-bottom: 20px; }
+.f-divider { width: 40px; height: 2px; background: var(--blue); margin-bottom: 20px; }
+.f-desc { font-size: 13px; color: var(--steel); line-height: 1.7; font-weight: 300; max-width: 260px; }
+.f-col-title { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 18px; }
+.f-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.f-links a { font-size: 13px; color: var(--steel); text-decoration: none; transition: color 0.2s; }
+.f-links a:hover { color: white; }
+.footer-bot { border-top: 1px solid rgba(255,255,255,0.04); padding: 20px 80px; display: flex; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,0.2); max-width: 1280px; margin: 0 auto; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding: 100px 32px 60px; }
+  .inner { padding: 0 32px; }
+  .services-grid, .benefits-grid, .industries-grid { grid-template-columns: 1fr; }
+  .why-grid, .contact-grid { grid-template-columns: 1fr; }
+  .footer-main { grid-template-columns: 1fr 1fr; padding: 40px 32px; gap: 32px; }
+  .footer-bot { padding: 20px 32px; flex-direction: column; gap: 6px; }
+  .stats-bar { grid-template-columns: repeat(2,1fr); }
+  .form-row { grid-template-columns: 1fr; }
+}
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-hex">CPC</div>
+    <div class="nav-brand">Colozzio<span>Private Contractor</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#benefits">Benefits</a></li>
+    <li><a href="#industries">Industries</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Request a Quote</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow"><div class="eyebrow-bar"></div><span class="eyebrow-txt">Industrial · Electrical · Mechanical</span></div>
+    <h1>
+      <span class="h1-c">CPC | Colozzio Private Contractor</span>
+      <span class="h1-a">INTEGRAL</span><br>
+      <span class="h1-b">SOLUTIONS</span>
+    </h1>
+    <p class="hero-desc">Professional maintenance, repair, and commissioning services for industrial and commercial clients. Trusted expertise across Ontario and Mexico for over a decade.</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-blue">Explore Services</a>
+      <a href="#contact" class="btn-ghost">Request a Quote</a>
+    </div>
+    <div class="hero-contacts">
+      <div class="hero-contact-item">
+        <div class="contact-dot"></div>
+        <span class="contact-label">Ontario</span>
+        <span class="contact-val">Ing. Andres · (519) 324-5614</span>
+      </div>
+      <div class="hero-contact-item">
+        <div class="contact-dot"></div>
+        <span class="contact-label">Mexico</span>
+        <span class="contact-val">Ing. David · (52) 55-5493-7842</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-service-card"><div class="service-icon">⚙️</div><div><div class="service-name">Motors & Pumps</div><div class="service-sub">Maintenance & Repair</div></div></div>
+    <div class="hero-service-card"><div class="service-icon">⚡</div><div><div class="service-name">Electrical Installations</div><div class="service-sub">Control Panels · MCC · Projects</div></div></div>
+    <div class="hero-service-card"><div class="service-icon">🔧</div><div><div class="service-name">Machinery Repair</div><div class="service-sub">Commissioning & Spare Parts</div></div></div>
+    <div class="hero-service-card"><div class="service-icon">🔋</div><div><div class="service-name">Emergency Power Plants</div><div class="service-sub">Preventive & Corrective Maintenance</div></div></div>
+    <div class="hero-service-card"><div class="service-icon">🔩</div><div><div class="service-name">Boiler Maintenance</div><div class="service-sub">Technical Assistance · Carburetion</div></div></div>
+    <div class="hero-service-card"><div class="service-icon">🏗️</div><div><div class="service-name">Construction Projects</div><div class="service-sub">Civil Works · Supervision</div></div></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Years of Experience</div></div>
+  <div class="stat"><div class="stat-num">200+</div><div class="stat-label">Projects Completed</div></div>
+  <div class="stat"><div class="stat-num">2</div><div class="stat-label">Countries Served</div></div>
+  <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Technical Support</div></div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="inner">
+    <div class="section-eyebrow">What We Do</div>
+    <h2 class="section-title">OUR <span class="acc">SERVICES</span></h2>
+    <p class="section-desc">Complete industrial maintenance and engineering solutions. From preventive maintenance to full project management — we keep your operations running at peak performance.</p>
+    <div class="services-grid">
+      <div class="svc-card">
+        <div class="svc-num">01</div>
+        <span class="svc-icon">⚙️</span>
+        <div class="svc-title">Motors & Pumps Maintenance</div>
+        <p class="svc-desc">Full preventive and corrective maintenance ensuring continuous, uninterrupted operation of your critical rotating equipment.</p>
+        <ul class="svc-items">
+          <li>General cleaning & inspection</li>
+          <li>Bearing replacement</li>
+          <li>Varnishing & insulation</li>
+          <li>Electrical connection inspection</li>
+          <li>Functional testing & commissioning</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">02</div>
+        <span class="svc-icon">⚡</span>
+        <div class="svc-title">General Electrical Installations</div>
+        <p class="svc-desc">Complete electrical solutions from MCC panel maintenance to new project planning and installation.</p>
+        <ul class="svc-items">
+          <li>Electrical control & power MCC panels</li>
+          <li>Service connection installation</li>
+          <li>New project planning & design</li>
+          <li>Cable placement in conduit & trays</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">03</div>
+        <span class="svc-icon">🔧</span>
+        <div class="svc-title">Machinery Repair & Commissioning</div>
+        <p class="svc-desc">Expert repair and commissioning of industrial machinery with full spare parts supply chain support.</p>
+        <ul class="svc-items">
+          <li>Preventive & corrective maintenance</li>
+          <li>Industrial machinery repair</li>
+          <li>Spare parts supply & sourcing</li>
+          <li>Commissioning & startup</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">04</div>
+        <span class="svc-icon">🔋</span>
+        <div class="svc-title">Emergency Power Plant Maintenance</div>
+        <p class="svc-desc">Keeping your backup power systems ready for when they matter most. Preventive and corrective maintenance programs.</p>
+        <ul class="svc-items">
+          <li>Preventive & corrective maintenance</li>
+          <li>Spare parts supply & commissioning</li>
+          <li>Emergency response support</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">05</div>
+        <span class="svc-icon">🔥</span>
+        <div class="svc-title">Boiler Maintenance</div>
+        <p class="svc-desc">Comprehensive boiler and water heater maintenance with technical assistance and water treatment services.</p>
+        <ul class="svc-items">
+          <li>Preventive & corrective maintenance</li>
+          <li>Spare parts sale & supply</li>
+          <li>Technical assistance</li>
+          <li>Carburetion services</li>
+          <li>Water softening analysis</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">06</div>
+        <span class="svc-icon">🏗️</span>
+        <div class="svc-title">Construction & Civil Works</div>
+        <p class="svc-desc">End-to-end project management for new construction and civil works, from planning through execution.</p>
+        <ul class="svc-items">
+          <li>New project management</li>
+          <li>Construction supervision</li>
+          <li>Material supply & procurement</li>
+          <li>Civil works coordination</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits" id="benefits">
+  <div class="inner">
+    <div class="section-eyebrow">Why CPC</div>
+    <h2 class="section-title">SERVICE <span class="acc">BENEFITS</span></h2>
+    <p class="section-desc">Every CPC engagement is built around four core commitments that protect your operations and your investment.</p>
+    <div class="benefits-grid">
+      <div class="benefit">
+        <div class="benefit-icon-wrap">🎯</div>
+        <div>
+          <div class="benefit-title">Personalized Attendance</div>
+          <p class="benefit-desc">Dedicated engineers assigned to your account. We learn your equipment, your facility, and your priorities — delivering solutions tailored to your specific operational needs.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon-wrap">🔄</div>
+        <div>
+          <div class="benefit-title">Uninterrupted Service</div>
+          <p class="benefit-desc">Continuous operation is our goal. Our maintenance programs are designed to minimize downtime and eliminate unexpected interruptions to your production line.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon-wrap">🛠️</div>
+        <div>
+          <div class="benefit-title">Ongoing Technical Support</div>
+          <p class="benefit-desc">Our engineers don't disappear after the job is done. We provide continuous technical support to answer questions, address concerns, and optimize performance.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon-wrap">🔒</div>
+        <div>
+          <div class="benefit-title">High Security Standards</div>
+          <p class="benefit-desc">We anticipate and eliminate potential failures before they occur. Our proactive approach protects your equipment, your team, and your bottom line.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="industries" id="industries">
+  <div class="industries-inner">
+    <div class="industries-header">
+      <div>
+        <div class="section-eyebrow" style="color:rgba(255,255,255,0.5)">Who We Serve</div>
+        <h2 class="section-title" style="color:white">INDUSTRIES <span style="color:var(--yellow)">SERVED</span></h2>
+      </div>
+      <p style="font-size:14px;color:rgba(255,255,255,0.4);max-width:280px;text-align:right;line-height:1.7">Trusted by manufacturing, agriculture, and commercial operations across Ontario and Mexico.</p>
+    </div>
+    <div class="industries-grid">
+      <div class="industry"><span class="industry-ico">🌾</span><div class="industry-name">Agriculture</div><div class="industry-desc">Greenhouse & farming operations</div></div>
+      <div class="industry"><span class="industry-ico">🏭</span><div class="industry-name">Manufacturing</div><div class="industry-desc">Production line equipment</div></div>
+      <div class="industry"><span class="industry-ico">🚜</span><div class="industry-name">Heavy Equipment</div><div class="industry-desc">Forklifts & industrial machinery</div></div>
+      <div class="industry"><span class="industry-ico">🏢</span><div class="industry-name">Commercial</div><div class="industry-desc">Facilities & infrastructure</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why">
+  <div class="inner">
+    <div class="why-grid">
+      <div class="why-left">
+        <div class="section-eyebrow">Our Commitment</div>
+        <h2 class="section-title">THE CPC <span class="acc">DIFFERENCE</span></h2>
+        <p class="section-desc" style="margin-bottom:0">We combine engineering expertise with hands-on experience to deliver results that keep your operations running — in Ontario and across Mexico.</p>
+        <div class="why-checklist">
+          <div class="why-item"><div class="why-check">✓</div><span class="why-txt">Licensed engineers with field experience</span></div>
+          <div class="why-item"><div class="why-check">✓</div><span class="why-txt">Bilingual team — English & Spanish</span></div>
+          <div class="why-item"><div class="why-check">✓</div><span class="why-txt">Fast response times for emergencies</span></div>
+          <div class="why-item"><div class="why-check">✓</div><span class="why-txt">Full spare parts supply chain</span></div>
+          <div class="why-item"><div class="why-check">✓</div><span class="why-txt">Transparent pricing — no hidden fees</span></div>
+          <div class="why-item"><div class="why-check">✓</div><span class="why-txt">Operations in Ontario, Canada & Mexico</span></div>
+        </div>
+      </div>
+      <div class="why-right">
+        <div class="why-metric"><div class="why-metric-num">100%</div><div class="why-metric-label">Client Retention Rate</div></div>
+        <div class="why-metric"><div class="why-metric-num">48h</div><div class="why-metric-label">Average Response Time</div></div>
+        <div class="why-metric"><div class="why-metric-num">10+</div><div class="why-metric-label">Years of Combined Experience</div></div>
+        <div class="why-metric"><div class="why-metric-num">2</div><div class="why-metric-label">Countries — Ontario & Mexico</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="inner">
+    <div class="section-eyebrow">Get In Touch</div>
+    <h2 class="section-title">REQUEST A <span class="acc">QUOTE</span></h2>
+    <p class="section-desc">Ready to talk about your project? Contact our team directly or fill out the form and we'll respond within 24 hours.</p>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-title">Contact Our Team</div>
+        <div class="contact-items">
+          <div class="c-item">
+            <div class="c-icon">📍</div>
+            <div><div class="c-label">Ontario, Canada</div><div class="c-val">Ing. Andres Colozzio</div></div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon">📞</div>
+            <div><div class="c-label">Ontario Phone</div><div class="c-val"><a href="tel:5193245614">(519) 324-5614</a></div></div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon">📍</div>
+            <div><div class="c-label">Mexico Office</div><div class="c-val">Ing. David Rojas Hernández</div></div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon">📞</div>
+            <div><div class="c-label">Mexico Phone</div><div class="c-val"><a href="tel:525554937842">(52) 55-5493-7842</a></div></div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon">⚡</div>
+            <div><div class="c-label">Services</div><div class="c-val" style="font-size:13px;color:var(--steel)">Motors · Electrical · Machinery · Boilers · Construction · Power Plants</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-title">Send Us a Message</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">First Name</label><input class="form-input" type="text" placeholder="John"></div>
+          <div class="form-group"><label class="form-label">Last Name</label><input class="form-input" type="text" placeholder="Smith"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Company</label><input class="form-input" type="text" placeholder="Your Company Name"></div>
+        <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="john@company.com"></div>
+        <div class="form-group"><label class="form-label">Service Needed</label>
+          <select class="form-select">
+            <option value="">Select a service...</option>
+            <option>Motors & Pumps Maintenance</option>
+            <option>Electrical Installations</option>
+            <option>Machinery Repair & Commissioning</option>
+            <option>Emergency Power Plant</option>
+            <option>Boiler Maintenance</option>
+            <option>Construction & Civil Works</option>
+            <option>Forklift Maintenance</option>
+            <option>Multiple Services</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Project Description</label><textarea class="form-textarea" placeholder="Describe your project or maintenance needs..."></textarea></div>
+        <button class="form-submit">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div>
+      <div class="f-brand">CPC | Colozzio</div>
+      <div class="f-tagline">Private Contractor · Integral Solutions</div>
+      <div class="f-divider"></div>
+      <p class="f-desc">Professional industrial maintenance and engineering services across Ontario, Canada and Mexico. Trusted expertise, reliable results.</p>
+    </div>
+    <div>
+      <div class="f-col-title">Services</div>
+      <ul class="f-links">
+        <li><a href="#services">Motors & Pumps</a></li>
+        <li><a href="#services">Electrical Installations</a></li>
+        <li><a href="#services">Machinery Repair</a></li>
+        <li><a href="#services">Boiler Maintenance</a></li>
+        <li><a href="#services">Construction</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Company</div>
+      <ul class="f-links">
+        <li><a href="#benefits">Our Benefits</a></li>
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#contact">Why CPC</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Contact</div>
+      <ul class="f-links">
+        <li><a href="tel:5193245614">Ontario: (519) 324-5614</a></li>
+        <li><a href="tel:525554937842">Mexico: (52) 55-5493-7842</a></li>
+        <li><a href="#contact">Request a Quote</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bot">
+    <span>© 2026 CPC | Colozzio Private Contractor · All Rights Reserved</span>
+    <span>Website by <strong style="color:rgba(255,255,255,0.35)">Lolo Digital</strong></span>
+  </div>
+</footer>
+
+</body>
+</html>
