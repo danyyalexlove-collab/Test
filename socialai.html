@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SocialAI — AI Social Media Agent</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--black:#080808;--white:#FFFFFF;--gray1:#111111;--gray2:#1A1A1A;--gray3:#252525;--gray4:#333333;--textmuted:#888888;--textlight:#CCCCCC;--accent:#0066FF;--accent2:#00C8FF;--green:#00D084;--red:#FF3B30;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;min-height:100vh;}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 32px;border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;background:rgba(8,8,8,0.95);backdrop-filter:blur(20px);z-index:100;}
+.logo{font-size:20px;font-weight:800;letter-spacing:-0.5px;}
+.logo span{color:var(--accent);}
+.badge{background:rgba(0,102,255,0.12);border:1px solid rgba(0,102,255,0.25);color:var(--accent2);font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;letter-spacing:0.5px;}
+.hero{max-width:800px;margin:0 auto;text-align:center;padding:80px 24px 60px;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--textmuted);font-size:12px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:24px;}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:24px;height:1px;background:var(--gray4);}
+.hero h1{font-size:clamp(40px,8vw,72px);font-weight:800;line-height:1.05;letter-spacing:-2px;margin-bottom:20px;}
+.hero h1 .blue{color:var(--accent);}
+.hero p{color:var(--textmuted);font-size:17px;max-width:480px;margin:0 auto 40px;line-height:1.7;}
+.platforms{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:60px;}
+.platform{display:flex;align-items:center;gap:6px;background:var(--gray2);border:1px solid var(--gray3);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:500;color:var(--textmuted);}
+.app{max-width:680px;margin:0 auto;padding:0 24px 80px;}
+.counter{display:flex;align-items:center;justify-content:space-between;background:var(--gray1);border:1px solid var(--gray3);border-radius:12px;padding:12px 18px;margin-bottom:20px;}
+.counter-left{font-size:13px;color:var(--textmuted);}
+.counter-left strong{color:var(--accent2);}
+.counter-dots{display:flex;gap:5px;}
+.counter-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);transition:background 0.3s;}
+.counter-dot.used{background:var(--gray3);}
+.card{background:var(--gray1);border:1px solid var(--gray3);border-radius:16px;padding:24px;margin-bottom:12px;}
+.card-title{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--textmuted);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.step-badge{background:var(--accent);color:white;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;}
+label{display:block;font-size:12px;font-weight:600;color:var(--textmuted);margin-bottom:6px;letter-spacing:0.3px;}
+input[type="text"],textarea,select{width:100%;background:var(--gray2);border:1px solid var(--gray3);border-radius:10px;color:var(--white);font-family:'Inter',sans-serif;font-size:14px;padding:12px 14px;margin-bottom:14px;outline:none;transition:border-color 0.2s;}
+input[type="text"]:focus,textarea:focus,select:focus{border-color:var(--accent);}
+input::placeholder,textarea::placeholder{color:var(--gray4);}
+textarea{resize:none;height:80px;}
+select option{background:var(--gray1);}
+.networks{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+.net-toggle{display:flex;flex-direction:column;align-items:center;gap:5px;background:var(--gray2);border:1.5px solid var(--gray3);border-radius:12px;padding:14px 8px;cursor:pointer;transition:all 0.15s;font-size:11px;font-weight:600;color:var(--textmuted);letter-spacing:0.3px;}
+.net-toggle.active{border-color:var(--accent);background:rgba(0,102,255,0.08);color:var(--white);}
+.net-toggle .icon{font-size:22px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.btn-generate{width:100%;background:var(--accent);color:white;border:none;border-radius:12px;padding:16px;font-family:'Inter',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;margin-top:8px;letter-spacing:-0.3px;}
+.btn-generate:hover{background:#0052CC;transform:translateY(-1px);}
+.btn-generate:disabled{background:var(--gray3);cursor:not-allowed;transform:none;}
+.btn-clear{width:100%;background:transparent;border:1px solid var(--gray3);color:var(--textmuted);border-radius:10px;padding:11px;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s;margin-top:8px;}
+.btn-clear:hover{border-color:var(--red);color:var(--red);}
+.loading{display:none;text-align:center;padding:60px 24px;}
+.loading.show{display:block;}
+.spinner{width:40px;height:40px;border:2px solid var(--gray3);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 16px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading p{color:var(--textmuted);font-size:14px;}
+.results{display:none;}
+.results.show{display:block;}
+.results-header{font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--textmuted);margin-bottom:16px;text-align:center;}
+.actions-bar{display:flex;gap:8px;margin-bottom:16px;}
+.btn-clear-all{flex:1;background:transparent;border:1px solid var(--gray3);color:var(--textmuted);border-radius:10px;padding:10px;font-family:'Inter',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all 0.2s;}
+.btn-clear-all:hover{border-color:var(--red);color:var(--red);}
+.post-card{background:var(--gray1);border:1px solid var(--gray3);border-radius:16px;padding:20px;margin-bottom:12px;animation:fadeUp 0.35s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.post-header{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+.post-platform{font-weight:700;font-size:14px;}
+.post-ready{background:rgba(0,208,132,0.1);border:1px solid rgba(0,208,132,0.2);color:var(--green);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:600;}
+.section-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+.section-content{font-size:14px;line-height:1.7;color:var(--textlight);white-space:pre-wrap;margin-bottom:12px;}
+.hashtags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;}
+.hashtag{background:rgba(0,102,255,0.08);border:1px solid rgba(0,102,255,0.15);color:var(--accent2);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:500;}
+.btn-copy{width:100%;background:transparent;border:1px solid var(--gray3);color:var(--textmuted);border-radius:8px;padding:9px;font-family:'Inter',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all 0.2s;margin-top:4px;}
+.btn-copy:hover{border-color:var(--green);color:var(--green);}
+.btn-copy.copied{border-color:var(--green);color:var(--green);}
+.video-section{margin-top:14px;background:rgba(0,102,255,0.04);border:1px solid rgba(0,102,255,0.12);border-radius:12px;padding:16px;}
+.video-title{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+.video-prompt{background:var(--gray2);border:1px solid var(--gray3);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--textmuted);line-height:1.6;margin-bottom:10px;font-style:italic;}
+.video-tools{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;}
+.btn-tool{display:flex;align-items:center;justify-content:center;gap:5px;background:var(--gray2);border:1px solid var(--gray3);border-radius:8px;padding:9px;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:var(--textmuted);cursor:pointer;transition:all 0.15s;text-decoration:none;}
+.btn-tool:hover{border-color:var(--accent);color:var(--white);}
+.btn-copy-prompt{width:100%;background:var(--accent);border:none;border-radius:8px;padding:9px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:white;cursor:pointer;margin-bottom:8px;}
+.btn-copy-prompt.copied{background:var(--green);}
+.btn-delete{width:100%;background:transparent;border:1px solid rgba(255,59,48,0.1);color:rgba(255,59,48,0.4);border-radius:8px;padding:9px;font-family:'Inter',sans-serif;font-size:11px;font-weight:500;cursor:pointer;transition:all 0.2s;margin-top:6px;}
+.btn-delete:hover{border-color:var(--red);color:var(--red);}
+.post-card.removing{animation:fadeOut 0.3s ease forwards;}
+@keyframes fadeOut{to{opacity:0;height:0;padding:0;margin:0;overflow:hidden;}}
+.btn-generate-another{width:100%;background:transparent;border:1.5px solid var(--accent);color:var(--accent);border-radius:12px;padding:14px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;margin-top:8px;}
+.btn-generate-another:hover{background:var(--accent);color:white;}
+.upgrade{background:var(--gray1);border:1px solid var(--gray3);border-radius:16px;padding:28px;text-align:center;margin-top:16px;display:none;}
+.upgrade.show{display:block;}
+.upgrade h3{font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-bottom:8px;}
+.upgrade p{color:var(--textmuted);font-size:14px;margin-bottom:24px;line-height:1.6;}
+.price-row{display:flex;gap:12px;justify-content:center;margin-bottom:20px;flex-wrap:wrap;}
+.price-card{background:var(--gray2);border:1px solid var(--gray3);border-radius:12px;padding:16px 20px;min-width:140px;}
+.price-card.featured{border-color:var(--accent);}
+.price-flag{font-size:10px;font-weight:700;color:var(--accent);letter-spacing:1px;margin-bottom:4px;}
+.price-amount{font-size:26px;font-weight:800;letter-spacing:-1px;}
+.price-desc{font-size:11px;color:var(--textmuted);margin-top:2px;}
+.btn-upgrade-canada{display:block;width:100%;background:var(--accent);color:white;border:none;border-radius:10px;padding:14px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;margin-bottom:8px;}
+.btn-upgrade-latam{display:block;width:100%;background:var(--gray2);color:var(--white);border:1px solid var(--gray3);border-radius:10px;padding:14px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;}
+footer{text-align:center;padding:32px 24px;border-top:1px solid var(--gray2);font-size:12px;color:var(--gray4);}
+footer a{color:var(--accent);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Social<span>AI</span></div>
+  <div class="badge">✦ FREE 5 USES</div>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">AI-Powered Social Media</div>
+  <h1>Your business,<br><span class="blue">everywhere</span><br>online.</h1>
+  <p>Describe your business and our AI generates ready-to-post captions, hashtags, and video prompts in seconds.</p>
+  <div class="platforms">
+    <div class="platform">📸 Instagram</div>
+    <div class="platform">🎵 TikTok</div>
+    <div class="platform">👥 Facebook</div>
+    <div class="platform">▶️ YouTube</div>
+    <div class="platform">🐦 Twitter/X</div>
+  </div>
+</div>
+
+<div class="app">
+
+  <div class="counter">
+    <div class="counter-left">Free generations: <strong id="counter-num">5</strong> remaining</div>
+    <div class="counter-dots" id="counter-dots">
+      <div class="counter-dot"></div>
+      <div class="counter-dot"></div>
+      <div class="counter-dot"></div>
+      <div class="counter-dot"></div>
+      <div class="counter-dot"></div>
+    </div>
+  </div>
+
+  <div id="form-section">
+    <div class="card">
+      <div class="card-title"><div class="step-badge">1</div> Your Business</div>
+      <label>Business name</label>
+      <input type="text" id="biz-name" placeholder="e.g. Maria's Bakery, Downtown Barbershop...">
+      <label>What do you sell or do?</label>
+      <textarea id="biz-desc" placeholder="e.g. We sell fresh homemade pastries, cakes and coffee. A family-owned bakery in downtown Toronto with 5 years of experience..."></textarea>
+      <label>Location</label>
+      <select id="biz-location">
+        <option value="">— Select —</option>
+        <option value="Toronto, Ontario">Toronto, Ontario</option>
+        <option value="Mississauga, Ontario">Mississauga, Ontario</option>
+        <option value="Brampton, Ontario">Brampton, Ontario</option>
+        <option value="Leamington, Ontario">Leamington, Ontario</option>
+        <option value="Windsor, Ontario">Windsor, Ontario</option>
+        <option value="Vancouver, BC">Vancouver, BC</option>
+        <option value="Calgary, Alberta">Calgary, Alberta</option>
+        <option value="Edmonton, Alberta">Edmonton, Alberta</option>
+        <option value="Montreal, Quebec">Montreal, Quebec</option>
+        <option value="Ottawa, Ontario">Ottawa, Ontario</option>
+        <option value="Other Canada">Other (Canada)</option>
+      </select>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><div class="step-badge">2</div> Social Networks</div>
+      <label>Select platforms</label>
+      <div class="networks">
+        <div class="net-toggle active" data-net="Instagram" onclick="toggleNet(this)"><div class="icon">📸</div>Instagram</div>
+        <div class="net-toggle active" data-net="TikTok" onclick="toggleNet(this)"><div class="icon">🎵</div>TikTok</div>
+        <div class="net-toggle active" data-net="Facebook" onclick="toggleNet(this)"><div class="icon">👥</div>Facebook</div>
+        <div class="net-toggle" data-net="YouTube Shorts" onclick="toggleNet(this)"><div class="icon">▶️</div>YouTube</div>
+        <div class="net-toggle" data-net="Twitter/X" onclick="toggleNet(this)"><div class="icon">🐦</div>Twitter/X</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><div class="step-badge">3</div> Content Type</div>
+      <div class="two-col">
+        <div>
+          <label>Content type</label>
+          <select id="content-type">
+            <option value="promotion">Promotion / Sale</option>
+            <option value="introduction">Business intro</option>
+            <option value="educational">Tip / Educational</option>
+            <option value="testimonial">Testimonial / Story</option>
+            <option value="seasonal">Holiday / Seasonal</option>
+          </select>
+        </div>
+        <div>
+          <label>Tone</label>
+          <select id="tone">
+            <option value="friendly and warm">Friendly 😊</option>
+            <option value="professional">Professional 💼</option>
+            <option value="fun and humorous">Fun 😂</option>
+            <option value="emotional and heartfelt">Heartfelt ❤️</option>
+          </select>
+        </div>
+      </div>
+      <label>Anything special to mention? (optional)</label>
+      <input type="text" id="special" placeholder="e.g. Grand opening, 2 for 1 Tuesdays, holiday hours...">
+    </div>
+
+    <button class="btn-generate" id="btn-generate" onclick="generateContent()">⚡ Generate Content</button>
+    <button class="btn-clear" onclick="clearForm()">Clear form</button>
+  </div>
+
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>Generating your content...<br>This takes a few seconds 🤖</p>
+  </div>
+
+  <div class="results" id="results">
+    <div class="results-header">✦ Your content is ready ✦</div>
+    <div class="actions-bar">
+      <button class="btn-clear-all" onclick="clearAll()">🗑 Clear all and start over</button>
+    </div>
+    <div id="posts-container"></div>
+    <button class="btn-generate-another" onclick="generateAnother()">↩ Generate another</button>
+  </div>
+
+  <div class="upgrade" id="upgrade">
+    <h3>You've used all 5 free generations 🎉</h3>
+    <p>Unlock unlimited content generation and grow your business across all platforms.</p>
+    <div class="price-row">
+      <div class="price-card featured">
+        <div class="price-flag">★ CANADA</div>
+        <div class="price-amount">$14.99 CAD</div>
+        <div class="price-desc">per month · unlimited</div>
+      </div>
+      <div class="price-card">
+        <div class="price-flag">LATIN AMERICA</div>
+        <div class="price-amount">$199 MXN</div>
+        <div class="price-desc">per month · unlimited</div>
+      </div>
+    </div>
+    <a href="https://buy.stripe.com/aFabJ1eCV4zz9c1cvQ8g007" target="_blank" class="btn-upgrade-canada">💳 Subscribe — Canada (CAD)</a>
+    <a href="https://mpago.la/1A5Qhra" target="_blank" class="btn-upgrade-latam">💳 Subscribe — Latin America (MXN)</a>
+  </div>
+
+</div>
+
+<footer>Powered by <a href="#">Lolo Digital</a> · AI Social Media Platform for businesses in Canada & Latin America</footer>
+
+<script>
+let netsSelected=['Instagram','TikTok','Facebook'];
+let usesCount=parseInt(localStorage.getItem('socialai_uses')||'0');
+const MAX_FREE=5;
+
+function toggleNet(el){
+  const net=el.dataset.net;
+  if(el.classList.contains('active')){
+    if(netsSelected.length===1)return;
+    el.classList.remove('active');
+    netsSelected=netsSelected.filter(n=>n!==net);
+  }else{
+    el.classList.add('active');
+    netsSelected.push(net);
+  }
+}
+
+function updateCounter(){
+  const left=MAX_FREE-usesCount;
+  document.getElementById('counter-num').textContent=Math.max(0,left);
+  document.querySelectorAll('.counter-dot').forEach((d,i)=>{d.classList.toggle('used',i>=left);});
+  if(left<=0){
+    document.getElementById('btn-generate').disabled=true;
+    document.getElementById('upgrade').classList.add('show');
+  }
+}
+
+updateCounter();
+
+async function generateContent(){
+  const name=document.getElementById('biz-name').value.trim();
+  const desc=document.getElementById('biz-desc').value.trim();
+  const location=document.getElementById('biz-location').value;
+  const type=document.getElementById('content-type').value;
+  const tone=document.getElementById('tone').value;
+  const special=document.getElementById('special').value.trim();
+
+  if(!name||!desc||!location){alert('Please fill in your business name, description and location.');return;}
+  if(netsSelected.length===0){alert('Please select at least one platform.');return;}
+
+  document.getElementById('form-section').style.display='none';
+  document.getElementById('loading').classList.add('show');
+  document.getElementById('results').classList.remove('show');
+
+  const prompt=`You are an expert social media marketer. Create social media content for this business:
+
+BUSINESS: ${name}
+DESCRIPTION: ${desc}
+LOCATION: ${location}
+CONTENT TYPE: ${type}
+TONE: ${tone}
+${special?`SPECIAL DETAIL: ${special}`:''}
+
+Generate content for these platforms: ${netsSelected.join(', ')}
+
+For EACH platform return a JSON object:
+{"platform":"name","emoji":"emoji","caption":"ready-to-post text with relevant emojis","hashtags":["up to 10 hashtags"],"tip":"platform-specific tip","video_prompt":"English prompt for Kling AI or CapCut AI to generate a short promo video. Describe scene, mood, lighting, movement. Max 2 sentences."}
+
+Return ONLY a valid JSON array. No markdown, no backticks, no extra text.
+
+Content must be in English, authentic, engaging, and platform-optimized. TikTok needs a strong hook. Instagram needs strategic emojis. Facebook needs a warm community tone.`;
+
+  try{
+    const _k='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';
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':_k,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
+    });
+    const data=await res.json();
+    const text=data.content.map(i=>i.text||'').join('');
+    const clean=text.replace(/```json|```/g,'').trim();
+    const posts=JSON.parse(clean);
+    showResults(posts);
+    usesCount++;
+    localStorage.setItem('socialai_uses',usesCount);
+    updateCounter();
+  }catch(err){
+    document.getElementById('loading').classList.remove('show');
+    document.getElementById('form-section').style.display='block';
+    alert('Error generating content. Please try again.');
+    console.error(err);
+  }
+}
+
+function showResults(posts){
+  document.getElementById('loading').classList.remove('show');
+  const container=document.getElementById('posts-container');
+  container.innerHTML='';
+  posts.forEach((post,i)=>{
+    const card=document.createElement('div');
+    card.className='post-card';
+    card.style.animationDelay=`${i*0.1}s`;
+    const tagsHTML=(post.hashtags||[]).map(h=>`<span class="hashtag">${h.startsWith('#')?h:'#'+h}</span>`).join('');
+    card.innerHTML=`
+      <div class="post-header">
+        <span style="font-size:20px">${post.emoji}</span>
+        <span class="post-platform">${post.platform}</span>
+        <span class="post-ready">✓ Ready to post</span>
+      </div>
+      <div class="section-label">Caption</div>
+      <div class="section-content">${post.caption}</div>
+      <div class="section-label">Hashtags</div>
+      <div class="hashtags">${tagsHTML}</div>
+      <div class="section-label">Tip for ${post.platform}</div>
+      <div class="section-content" style="color:var(--textmuted);font-size:13px">${post.tip}</div>
+      <button class="btn-copy" onclick="copyText(this,\`${esc(post.caption)}\n\n${(post.hashtags||[]).join(' ')}\`)">Copy caption + hashtags</button>
+      ${post.video_prompt?`
+      <div class="video-section">
+        <div class="video-title">🎬 Generate your video with AI</div>
+        <div class="video-prompt">${post.video_prompt}</div>
+        <button class="btn-copy-prompt" onclick="copyPrompt(this,\`${esc(post.video_prompt)}\`)">Copy AI prompt</button>
+        <div style="font-size:11px;color:var(--textmuted);margin-bottom:6px;">Paste the prompt into any of these tools:</div>
+        <div class="video-tools">
+          <a class="btn-tool" href="https://klingai.com" target="_blank">🎬 Kling AI</a>
+          <a class="btn-tool" href="https://www.capcut.com/ai-video-generator" target="_blank">✂️ CapCut AI</a>
+          <a class="btn-tool" href="https://www.meta.ai" target="_blank">🤖 Meta AI</a>
+          <a class="btn-tool" href="https://www.tiktok.com/effect-house" target="_blank">🎵 TikTok AI</a>
+        </div>
+      </div>`:''}
+      <button class="btn-delete" onclick="deletePost(this)">🗑 Remove this post</button>
+    `;
+    container.appendChild(card);
+  });
+  document.getElementById('results').classList.add('show');
+}
+
+function esc(s){return s.replace(/`/g,'\\`').replace(/\$/g,'\\$');}
+
+function copyText(btn,text){
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='✓ Copied!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy caption + hashtags';btn.classList.remove('copied');},2000);
+  });
+}
+
+function copyPrompt(btn,text){
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='✓ Prompt copied!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy AI prompt';btn.classList.remove('copied');},2500);
+  });
+}
+
+function deletePost(btn){
+  const card=btn.closest('.post-card');
+  card.classList.add('removing');
+  setTimeout(()=>{
+    card.remove();
+    if(document.getElementById('posts-container').children.length===0){
+      document.getElementById('results').classList.remove('show');
+      document.getElementById('form-section').style.display='block';
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+  },300);
+}
+
+function clearAll(){
+  if(!confirm('Clear all results and start over?'))return;
+  document.getElementById('posts-container').innerHTML='';
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('form-section').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function clearForm(){
+  document.getElementById('biz-name').value='';
+  document.getElementById('biz-desc').value='';
+  document.getElementById('biz-location').value='';
+  document.getElementById('special').value='';
+  netsSelected=['Instagram','TikTok','Facebook'];
+  document.querySelectorAll('.net-toggle').forEach(el=>{
+    el.classList.toggle('active',['Instagram','TikTok','Facebook'].includes(el.dataset.net));
+  });
+}
+
+function generateAnother(){
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('form-section').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
